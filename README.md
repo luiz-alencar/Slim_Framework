@@ -10,7 +10,7 @@ Para esse passo a passo vamos começar com comandos simples...
 
 4º passo -> Na pasta desejada, abra o terminal e execute esse comando: composer require slim/slim:"4.*” . Ele irá criar toda a estrutura do Slim Framework 4!
 
-5º passo -> Execute também o seguinte comando para adicionar a implementação do ps7: composer require slim/psr7 -w!
+5º passo -> Execute também o seguinte comando para adicionar a implementação do ps7: composer require slim/psr7 -w
 
 6º passo -> Execute o comando a seguir para inicializar a api: php -S localhost:8080 -t public. Você pode manter na porta 8080 ou escolher uma de sua preferência.
 
