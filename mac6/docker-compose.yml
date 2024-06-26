@@ -2,6 +2,7 @@ version: '3'
 services:
   db:
     image: mariadb:10.5
+    container_name: "mysql"
     restart: always
     environment:
       - MARIADB_USER=root
@@ -9,8 +10,7 @@ services:
     ports:
       - "3308:3306"
     volumes:
-      - ./app/db/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
-
+      - ./config/tarefa.sql:/docker-entrypoint-initdb.d/tarefa.sql
 
   adminer:
     image: adminer:4.8.1
