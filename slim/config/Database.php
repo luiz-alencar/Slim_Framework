@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "127.0.0.1";
-    private $port = "3308"; // Porta padrão do MySQL/MariaDB
+    private $port = "3308";
     private $user = "root";
     private $db = "tarefa";
     private $pwd = "123";

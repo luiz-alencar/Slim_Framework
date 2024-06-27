@@ -2,11 +2,6 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$app->get('/usuario', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello World");
-    return $response;
-});
-
 $app->get('/usuario/get', function (Request $request, Response $response, $args) {
     
     $query = "SELECT * FROM usuario";
@@ -71,25 +66,15 @@ $app->get('/usuario/get/{id}', function (Request $request, Response $response, $
 $app->post('/usuario/post', function (Request $request, Response $response, $args) {
     $data = json_decode($request->getBody(), true);
 
-    // Verifica se os dados necessários estão presentes 
-    #if (!isset($data['id']) || !isset($data['nome'])) {
-    #    $response->getBody()->write(json_encode(array('error' => 'ID e Nome são requeridos para continuar')));
-    #    return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
-    #}
-
-    # $id = $data['id'];
     $nome = $data['nome'];
 
-    // Consulta SQL para inserir o id e nome na tabela produto
     $query = "INSERT INTO usuario (nome) VALUES (:nome)";
 
     try {
-        // Conexão com o banco de dados
         $db = new Database();
         $db = $db->connect();
 
         $stmt = $db->prepare($query);
-        #$stmt->bindParam(':id', $id);
         $stmt->bindParam(':nome', $nome);
         $stmt->execute();
 

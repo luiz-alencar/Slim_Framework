@@ -2,11 +2,6 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$app->get('/carro', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello World");
-    return $response;
-});
-
 $app->get('/carro/get', function (Request $request, Response $response, $args) {
     
     $query = "SELECT * FROM carro";
@@ -71,26 +66,16 @@ $app->get('/carro/get/{id}', function (Request $request, Response $response, $ar
 $app->post('/carro/post', function (Request $request, Response $response, $args) {
     $data = json_decode($request->getBody(), true);
 
-    // Verifica se os dados necessários estão presentes 
-    #if (!isset($data['id']) || !isset($data['nome'])) {
-    #    $response->getBody()->write(json_encode(array('error' => 'ID e Nome são requeridos para continuar')));
-    #    return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
-    #}
-
-    # $id = $data['id'];
     $nome = $data['nome'];
     $usuario_id = $data['usuario_id'];
 
-    // Consulta SQL para inserir o id e nome na tabela produto
     $query = "INSERT INTO carro (nome, usuario_id) VALUES (:nome, :usuario_id)";
 
     try {
-        // Conexão com o banco de dados
         $db = new Database();
         $db = $db->connect();
 
         $stmt = $db->prepare($query);
-        #$stmt->bindParam(':id', $id);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':usuario_id', $usuario_id);
         $stmt->execute();
