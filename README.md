@@ -9,7 +9,7 @@
 ## O que é um framework? 
 > Um framework é uma estrutura de suporte definida para ajudar a desenvolver e organizar softwares. Ele oferece um conjunto de ferramentas, bibliotecas, padrões e diretrizes que permitem aos desenvolvedores criar aplicações de forma mais eficiente e consistente.
 
-## E o Slim framework?
+## E o Slim Framework?
 > O Slim é um framework PHP usado para desenvolver aplicações web e APIs de forma rápida e eficiente. Ele é conhecido por ser minimalista e por facilitar a criação de rotas, o gerenciamento de dependências e a manipulação de requisições e respostas HTTP. 
 
 ## Você sabe o que é uma API?
@@ -17,7 +17,7 @@
 
 <br>
 
-# Vamos começar com alguns comandos simples... Certeza que você já conhece! 😉
+# Vamos começar com alguns comandos simples
 
 ### 1º passo -> Verificar se você tem o php em sua máquina, execute o comando: 
 
