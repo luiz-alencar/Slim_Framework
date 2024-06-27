@@ -10,7 +10,7 @@
 
     $ php -v 
 
--> Caso não tenha, o prórpio terminal te dará como instalá-lo, segue código: 
+-> Caso não tenha, o próprio terminal te dará como instalá-lo, segue código: 
 
     $ sudo apt-get install php8.1-mysql
 
@@ -34,61 +34,60 @@
 
     $ composer require slim/psr7 -w
 
-### 6º passo -> Baixar o arquivo tarefa.sql que está na pasta config
+### 6º passo -> Baixar o arquivo "tarefa.sql" que está na pasta config
  
- -> Após baixar o arquivo, crie uma pasta com o nome "config" dentro pasta raiz
- 
- -> Copie e cole o arquivo tarefa.sql dentro da pasta config
+ - Após baixar o arquivo, crie uma pasta com o nome "config" dentro pasta raiz
+ -  Copie e cole o arquivo tarefa.sql dentro da pasta "config"
  
 ### 7º passo ->  Neste passo a passo vamos inicializar o container do nosso banco de dados:
  
- -> Baixe o arquivo: docker-compose.yml
- -> Neste momento o arquivo deve ser colocado na pasta raiz.
+ - Baixe o arquivo: "docker-compose.yml"
+ - Neste momento o arquivo deve ser colocado na pasta raiz.
 
  ### 8º passo -> Vamos inicializar o docker:
 
- -> Antes de inicializar o docker temos que verificar se existem container ativos, use o comando:
+ - Antes de inicializar o docker temos que verificar se existem container's ativos, use o comando:
      
-    $ docker ps -a
-    $ docker stop "nome do container"
-    $ docker rm "nome do container"
+        $ docker ps -a
+        $ docker stop "nome do container"
+        $ docker rm "nome do container"
 
- -> Após a verificação, vamos subir nosso container:
+ - Após a verificação, vamos subir nosso container:
  
-    $ docker compose up -d
+        $ docker compose up -d
     
 ### 9º passo -> Criar a conexão com o banco de dados do container 
 
- -> Dentro da pasta config, crie um arquivo database.php e cole o seguinte código:
+ - Dentro da pasta "config", crie um arquivo "database.php" e cole o seguinte código:
   
-    <?php
-    class Database {
-        private $host = "127.0.0.1";
-        private $port = "3308"; 
-        private $user = "root";
-        private $db = "tarefa";
-        private $pwd = "123";
-        private $conn = NULL;
-    
-        public function connect() {
-    
-            try{
-                $this->conn = new PDO("mysql:host=$this->host;port=$this->port;dbname=$this->db", $this->user, $this->pwd);
-                $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch(PDOException $e) {
-                echo "Connection Error: " . $e->getMessage();
+        <?php
+        class Database {
+            private $host = "127.0.0.1";
+            private $port = "3308"; 
+            private $user = "root";
+            private $db = "tarefa";
+            private $pwd = "123";
+            private $conn = NULL;
+        
+            public function connect() {
+        
+                try{
+                    $this->conn = new PDO("mysql:host=$this->host;port=$this->port;dbname=$this->db", $this->user, $this->pwd);
+                    $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                } catch(PDOException $e) {
+                    echo "Connection Error: " . $e->getMessage();
+                }
+        
+                return $this->conn;
             }
-    
-            return $this->conn;
         }
-    }
 
-### 10º passo -> Criar a pasta public e os testes do index.php
+### 10º passo -> Criar a pasta "public" e os testes do "index.php"
 
--> Crie uma pasta com o nome "public" dentro pasta raiz
--> Dentro da pasta "public" crie um arquivo "index.php"
+- Crie uma pasta com o nome "public" dentro pasta raiz
+- Dentro da pasta "public" crie um arquivo "index.php"
 
--> Copie o código e cole no arquivo index.php que você acabou de criar:
+- Copie o código e cole no arquivo "index.php" que você acabou de criar:
 
     <?php
     use Psr\Http\Message\ResponseInterface as Response;
@@ -106,27 +105,27 @@
     
     $app->run();
 
--> Para fins de teste, utilize o seguinte código:
+- Para fins de teste, utilize o seguinte código:
 
     $ php -S localhost:8000 -t public
 
-### 11º passo -> Criar a pasta routes
+### 11º passo -> Criar a pasta "routes"
 
--> Crie uma pasta com o nome "routes" dentro pasta raiz
--> Dentro da pasta "routes" você criará dois arquivos: carro.php e usuario.php
+- Crie uma pasta com o nome "routes" dentro pasta raiz
+- Dentro da pasta "routes" você criará dois arquivos: "carro.php" e "usuario.php"
 
-### 12º passo -> Editando index.php
+### 12º passo -> Editando "index.php"
 
--> No arquivo "index.php" você vai acrescentar o require de database, usuario e carro como esta no codigo abaixo:
+- No arquivo "index.php" você vai acrescentar o require de database, usuario e carro como está no código abaixo:
 
-    require __DIR__ . '/../config/Database.php';
-    
-    $app = AppFactory::create();
-    
-    require __DIR__ . '/../routes/usuario.php';
-    require __DIR__ . '/../routes/carro.php';
+      require __DIR__ . '/../config/Database.php';
+      
+      $app = AppFactory::create();
+      
+      require __DIR__ . '/../routes/usuario.php';
+      require __DIR__ . '/../routes/carro.php';
 
-### 13º passo -> Introdução ao método get no arquivo usuario.php 
+### 13º passo -> Introdução ao método get no arquivo "usuario.php" 
     
     <?php
     use Psr\Http\Message\ResponseInterface as Response;
@@ -161,7 +160,7 @@
         
     });
 
-### 14º passo -> Introdução ao método get no arquivo usuario.php selecionando por id:
+### 14º passo -> Introdução ao método get no arquivo "usuario.php" selecionando por id:
 
     $app->get('/usuario/get/{id}', function (Request $request, Response $response, $args) {
         
@@ -194,7 +193,7 @@
     
     });
 
-### 15º passo -> Introdução ao método post no arquivo usuario.php:
+### 15º passo -> Introdução ao método post no arquivo "usuario.php"
 
     $app->post('/usuario/post', function (Request $request, Response $response, $args) {
         $data = json_decode($request->getBody(), true);
@@ -222,7 +221,7 @@
         }
     });
 
-### 16º passo -> Introdução ao método delete no arquivo usuario.php:
+### 16º passo -> Introdução ao método delete no arquivo "usuario.php"
 
     $app->delete('/usuario/delete/{id}', function (Request $request, Response $response, $args) {
         
@@ -248,7 +247,7 @@
     
     });
 
-### 17º passo -> Introdução ao método put no arquivo usuario.php:
+### 17º passo -> Introdução ao método put no arquivo "usuario.php"
 
     $app->put('/usuario/put/{id}', function (Request $request, Response $response, $args) {
         
@@ -280,7 +279,7 @@
     
     });
 
-### 18º passo -> Introdução ao método get no arquivo carro.php 
+### 18º passo -> Introdução ao método get no "arquivo carro.php" 
 
     $app->get('/carro/get', function (Request $request, Response $response, $args) {
         
@@ -311,7 +310,7 @@
         
     });
     
-### 19º passo -> Introdução ao método get no arquivo carro.php selecionando por id:
+### 19º passo -> Introdução ao método get no arquivo "carro.php" selecionando por id
 
     $app->get('/carro/get/{id}', function (Request $request, Response $response, $args) {
         
@@ -344,7 +343,7 @@
     
     });
 
-### 20º passo -> Introdução ao método post no arquivo carro.php:
+### 20º passo -> Introdução ao método post no arquivo "carro.php"
 
     $app->post('/carro/post', function (Request $request, Response $response, $args) {
         $data = json_decode($request->getBody(), true);
@@ -382,7 +381,7 @@
         }
     });
 
-### 21º passo -> Introdução ao método delete no arquivo carro.php:
+### 21º passo -> Introdução ao método delete no arquivo "carro.php"
 
     $app->delete('/carro/delete/{id}', function (Request $request, Response $response, $args) {
         
@@ -408,7 +407,7 @@
     
     });
 
-### 22º passo -> Introdução ao método put no arquivo carro.php:
+### 22º passo -> Introdução ao método put no arquivo "carro.php"
 
     $app->put('/carro/put/{id}', function (Request $request, Response $response, $args) {
         
