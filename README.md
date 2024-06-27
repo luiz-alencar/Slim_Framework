@@ -1,10 +1,23 @@
-# Bem vindo ao tutorial Slim_Framework 4!!💻
+# Bem-vind@s ao tutorial do Slim_Framework 4!!💻🛜
 
 <picture>
   <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://user-images.githubusercontent.com/781074/82730649-87608800-9d01-11ea-83ea-6112f973b051.png">
 </picture>
 
-## Para começar este tutorial vamos começar com alguns comandos simples... Certeza que você já conhece! ^_^
+<br>
+
+## O que é um framework? 
+> Um framework é uma estrutura de suporte definida para ajudar a desenvolver e organizar software. Ele oferece um conjunto de ferramentas, bibliotecas, padrões e diretrizes que permitem aos desenvolvedores criar aplicações de forma mais eficiente e consistente.
+
+## E o Slim framework?
+> O Slim é um framework PHP usado para desenvolver aplicações web e APIs de forma rápida e eficiente. Ele é conhecido por ser minimalista e por facilitar a criação de rotas, o gerenciamento de dependências e a manipulação de requisições e respostas HTTP. 
+
+## Você sabe o que é uma API?
+> API significa Interface de Programação de Aplicações (em inglês, Application Programming Interface). É um conjunto de regras e protocolos que permite que diferentes softwares se comuniquem entre si. Em termos simples, uma API define como diferentes componentes de software devem interagir uns com os outros. Existem diferentes tipos de APIs, mas a mais comum é a API web, que permite que aplicações se comuniquem através da internet.
+
+<br>
+
+# Vamos começar com alguns comandos simples... Certeza que você já conhece! 😉
 
 ### 1º passo -> Verificar se você tem o php em sua máquina, execute o comando: 
 
@@ -14,32 +27,32 @@
 
     $ sudo apt-get install php8.1-mysql
 
-### 2º passo -> Verificar se você tem o composer em sua máquina, execute o comando: 
+### 2º passo -> Verificar se você tem o composer em sua máquina, segue código:
 
     $ composer --version
 
--> Caso não tenha, o próprio terminal te dará como instalá-lo, segue código:
+- Caso não tenha, o próprio terminal te dará como instalá-lo, segue código:
 
-    $ sudo apt-get install composer
+      $ sudo apt-get install composer
  
-### 3º passo -> Escolher a pasta onde irá começar seu projeto!
+### 3º passo -> Escolher a pasta onde irá começar seu projeto.
 
-### 4º passo -> Na pasta desejada, abra o terminal e execute o seguinte comando: 
+### 4º passo -> Na pasta desejada, abra o terminal e execute o comando: 
 
     $ composer require slim/slim:"4.*”
 
--> Ele irá criar toda a estrutura do Slim Framework 4!
+- Ele irá criar toda a estrutura do Slim Framework 4.
 
-### 5º passo -> Execute o seguinte comando para adicionar a implementação do psr7: 
+### 5º passo -> Implementação do psr7: 
 
     $ composer require slim/psr7 -w
 
 ### 6º passo -> Baixar o arquivo "tarefa.sql" que está na pasta config
  
  - Após baixar o arquivo, crie uma pasta com o nome "config" dentro pasta raiz
- -  Copie e cole o arquivo tarefa.sql dentro da pasta "config"
+ -  Copie e cole o arquivo "tarefa.sql" dentro da pasta "config"
  
-### 7º passo ->  Neste passo a passo vamos inicializar o container do nosso banco de dados:
+### 7º passo ->  Inicializar o container do nosso banco de dados
  
  - Baixe o arquivo: "docker-compose.yml"
  - Neste momento o arquivo deve ser colocado na pasta raiz.
@@ -89,25 +102,25 @@
 
 - Copie o código e cole no arquivo "index.php" que você acabou de criar:
 
-    <?php
-    use Psr\Http\Message\ResponseInterface as Response;
-    use Psr\Http\Message\ServerRequestInterface as Request;
-    use Slim\Factory\AppFactory;
-    
-    require __DIR__ . '/../vendor/autoload.php';
-    
-    $app = AppFactory::create();
-    
-    $app->get('/', function (Request $request, Response $response, $args) {
-        $response->getBody()->write("Hello World");
-        return $response;
-    });
-    
-    $app->run();
+      <?php
+      use Psr\Http\Message\ResponseInterface as Response;
+      use Psr\Http\Message\ServerRequestInterface as Request;
+      use Slim\Factory\AppFactory;
+      
+      require __DIR__ . '/../vendor/autoload.php';
+      
+      $app = AppFactory::create();
+      
+      $app->get('/', function (Request $request, Response $response, $args) {
+          $response->getBody()->write("Hello World");
+          return $response;
+      });
+      
+      $app->run();
 
 - Para fins de teste, utilize o seguinte código:
 
-    $ php -S localhost:8000 -t public
+      $ php -S localhost:8000 -t public
 
 ### 11º passo -> Criar a pasta "routes"
 
