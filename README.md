@@ -1,4 +1,4 @@
-# Bem-vind@s ao tutorial do Slim_Framework 4!!💻🛜
+# Bem-vind@s ao tutorial do Slim_Framework 4!!💻
 
 <picture>
   <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://user-images.githubusercontent.com/781074/82730649-87608800-9d01-11ea-83ea-6112f973b051.png">
@@ -7,7 +7,7 @@
 <br>
 
 ## O que é um framework? 
-> Um framework é uma estrutura de suporte definida para ajudar a desenvolver e organizar software. Ele oferece um conjunto de ferramentas, bibliotecas, padrões e diretrizes que permitem aos desenvolvedores criar aplicações de forma mais eficiente e consistente.
+> Um framework é uma estrutura de suporte definida para ajudar a desenvolver e organizar softwares. Ele oferece um conjunto de ferramentas, bibliotecas, padrões e diretrizes que permitem aos desenvolvedores criar aplicações de forma mais eficiente e consistente.
 
 ## E o Slim framework?
 > O Slim é um framework PHP usado para desenvolver aplicações web e APIs de forma rápida e eficiente. Ele é conhecido por ser minimalista e por facilitar a criação de rotas, o gerenciamento de dependências e a manipulação de requisições e respostas HTTP. 
@@ -45,6 +45,8 @@
 
 ### 5º passo -> Implementação do psr7: 
 
+> o PSR-7 tem como objetivo modelar mensagens HTTP
+
     $ composer require slim/psr7 -w
 
 ### 6º passo -> Baixar o arquivo "tarefa.sql" que está na pasta config
@@ -52,12 +54,12 @@
  - Após baixar o arquivo, crie uma pasta com o nome "config" dentro pasta raiz
  -  Copie e cole o arquivo "tarefa.sql" dentro da pasta "config"
  
-### 7º passo ->  Inicializar o container do nosso banco de dados
+### 7º passo ->  Criar pasta do docker que conterá nosso banco:
  
  - Baixe o arquivo: "docker-compose.yml"
  - Neste momento o arquivo deve ser colocado na pasta raiz.
 
- ### 8º passo -> Vamos inicializar o docker:
+ ### 8º passo -> Vamos inicializar o container:
 
  - Antes de inicializar o docker temos que verificar se existem container's ativos, use o comando:
      
@@ -67,7 +69,7 @@
 
  - Após a verificação, vamos subir nosso container:
  
-        $ docker compose up -d
+        $ docker-compose up -d
     
 ### 9º passo -> Criar a conexão com o banco de dados do container 
 
@@ -122,12 +124,18 @@
 
       $ php -S localhost:8000 -t public
 
-### 11º passo -> Criar a pasta "routes"
+### 11º passo -> Baixar o Insomnia:
+
+- Para fazer os teste de requisões, baixe o aplicativo disponível no link a seguir:
+
+      https://insomnia.rest/download.
+
+### 12º passo -> Criar a pasta "routes"
 
 - Crie uma pasta com o nome "routes" dentro pasta raiz
 - Dentro da pasta "routes" você criará dois arquivos: "carro.php" e "usuario.php"
 
-### 12º passo -> Editando "index.php"
+### 13º passo -> Editando "index.php"
 
 - No arquivo "index.php" você vai acrescentar o require de database, usuario e carro como está no código abaixo:
 
@@ -138,7 +146,7 @@
       require __DIR__ . '/../routes/usuario.php';
       require __DIR__ . '/../routes/carro.php';
 
-### 13º passo -> Introdução ao método get no arquivo "usuario.php" 
+### 14º passo -> Introdução ao método get no arquivo "usuario.php" 
     
     <?php
     use Psr\Http\Message\ResponseInterface as Response;
@@ -173,7 +181,7 @@
         
     });
 
-### 14º passo -> Introdução ao método get no arquivo "usuario.php" selecionando por id:
+### 15º passo -> Introdução ao método get no arquivo "usuario.php" selecionando por id:
 
     $app->get('/usuario/get/{id}', function (Request $request, Response $response, $args) {
         
@@ -206,7 +214,7 @@
     
     });
 
-### 15º passo -> Introdução ao método post no arquivo "usuario.php"
+### 16º passo -> Introdução ao método post no arquivo "usuario.php"
 
     $app->post('/usuario/post', function (Request $request, Response $response, $args) {
         $data = json_decode($request->getBody(), true);
@@ -234,7 +242,7 @@
         }
     });
 
-### 16º passo -> Introdução ao método delete no arquivo "usuario.php"
+### 17º passo -> Introdução ao método delete no arquivo "usuario.php"
 
     $app->delete('/usuario/delete/{id}', function (Request $request, Response $response, $args) {
         
@@ -260,7 +268,7 @@
     
     });
 
-### 17º passo -> Introdução ao método put no arquivo "usuario.php"
+### 18º passo -> Introdução ao método put no arquivo "usuario.php"
 
     $app->put('/usuario/put/{id}', function (Request $request, Response $response, $args) {
         
@@ -292,7 +300,7 @@
     
     });
 
-### 18º passo -> Introdução ao método get no "arquivo carro.php" 
+### 19º passo -> Introdução ao método get no "arquivo carro.php" 
 
     $app->get('/carro/get', function (Request $request, Response $response, $args) {
         
@@ -323,7 +331,7 @@
         
     });
     
-### 19º passo -> Introdução ao método get no arquivo "carro.php" selecionando por id
+### 20º passo -> Introdução ao método get no arquivo "carro.php" selecionando por id
 
     $app->get('/carro/get/{id}', function (Request $request, Response $response, $args) {
         
@@ -356,7 +364,7 @@
     
     });
 
-### 20º passo -> Introdução ao método post no arquivo "carro.php"
+### 21º passo -> Introdução ao método post no arquivo "carro.php"
 
     $app->post('/carro/post', function (Request $request, Response $response, $args) {
         $data = json_decode($request->getBody(), true);
@@ -394,7 +402,7 @@
         }
     });
 
-### 21º passo -> Introdução ao método delete no arquivo "carro.php"
+### 22º passo -> Introdução ao método delete no arquivo "carro.php"
 
     $app->delete('/carro/delete/{id}', function (Request $request, Response $response, $args) {
         
@@ -420,7 +428,7 @@
     
     });
 
-### 22º passo -> Introdução ao método put no arquivo "carro.php"
+### 23º passo -> Introdução ao método put no arquivo "carro.php"
 
     $app->put('/carro/put/{id}', function (Request $request, Response $response, $args) {
         
@@ -453,6 +461,6 @@
     });
 
     
-### 23º passo -> Execute o comando a seguir para inicializar a api: 
+### 24º passo -> Execute o comando a seguir para inicializar a api: 
 
     $ php -S localhost:8000 -t public
