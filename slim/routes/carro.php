@@ -2,6 +2,8 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+use function public\auth;
+
 $app->get('/carro/get', function (Request $request, Response $response, $args) {
     
     $query = "SELECT * FROM carro";
@@ -29,7 +31,8 @@ $app->get('/carro/get', function (Request $request, Response $response, $args) {
         return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
     }
     
-});
+})
+->add(auth());
 
 
 $app->get('/carro/get/{id}', function (Request $request, Response $response, $args) {
@@ -61,7 +64,9 @@ $app->get('/carro/get/{id}', function (Request $request, Response $response, $ar
         return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
     }
 
-});
+})
+->add(auth());
+
 
 $app->post('/carro/post', function (Request $request, Response $response, $args) {
     $data = json_decode($request->getBody(), true);
@@ -87,33 +92,8 @@ $app->post('/carro/post', function (Request $request, Response $response, $args)
         $response->getBody()->write(json_encode(array('error' => $e->getMessage())));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
     }
-});
-
-
-
-$app->delete('/carro/delete/{id}', function (Request $request, Response $response, $args) {
-    
-    $id = $args['id'];
-    $query = "DELETE FROM carro WHERE id = $id";
-
-    try {
-
-        $db = new Database();
-        $db = $db->connect();
-
-        $stmt = $db->prepare($query);
-        $result = $stmt->execute();
-
-        $response->getBody()->write(json_encode(array('message'=> 'Usuário deletado!')));
-        return $response->withHeader('Content-Type', 'application.json')->withStatus(200);
-
-    } catch(PDOException $exp) {
-
-        $response->getBody()->write(json_encode(array('Error' => $exp->getMessage())));
-        return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
-    }
-
-});
+})
+->add(auth());
 
 
 $app->put('/carro/put/{id}', function (Request $request, Response $response, $args) {
@@ -144,4 +124,31 @@ $app->put('/carro/put/{id}', function (Request $request, Response $response, $ar
         return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
     }
 
-});
+})
+->add(auth());
+
+
+$app->delete('/carro/delete/{id}', function (Request $request, Response $response, $args) {
+    
+    $id = $args['id'];
+    $query = "DELETE FROM carro WHERE id = $id";
+
+    try {
+
+        $db = new Database();
+        $db = $db->connect();
+
+        $stmt = $db->prepare($query);
+        $result = $stmt->execute();
+
+        $response->getBody()->write(json_encode(array('message'=> 'Usuário deletado!')));
+        return $response->withHeader('Content-Type', 'application.json')->withStatus(200);
+
+    } catch(PDOException $exp) {
+
+        $response->getBody()->write(json_encode(array('Error' => $exp->getMessage())));
+        return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
+    }
+
+})
+->add(auth());

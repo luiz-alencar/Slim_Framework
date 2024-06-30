@@ -2,6 +2,8 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+use function public\auth;
+
 $app->get('/usuario/get', function (Request $request, Response $response, $args) {
     
     $query = "SELECT * FROM usuario";
@@ -29,7 +31,8 @@ $app->get('/usuario/get', function (Request $request, Response $response, $args)
         return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
     }
     
-});
+})
+->add(auth());;
 
 
 $app->get('/usuario/get/{id}', function (Request $request, Response $response, $args) {
@@ -61,7 +64,9 @@ $app->get('/usuario/get/{id}', function (Request $request, Response $response, $
         return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
     }
 
-});
+})
+->add(auth());;
+
 
 $app->post('/usuario/post', function (Request $request, Response $response, $args) {
     $data = json_decode($request->getBody(), true);
@@ -85,33 +90,8 @@ $app->post('/usuario/post', function (Request $request, Response $response, $arg
         $response->getBody()->write(json_encode(array('error' => $e->getMessage())));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
     }
-});
-
-
-
-$app->delete('/usuario/delete/{id}', function (Request $request, Response $response, $args) {
-    
-    $id = $args['id'];
-    $query = "DELETE FROM usuario WHERE id = $id";
-
-    try {
-
-        $db = new Database();
-        $db = $db->connect();
-
-        $stmt = $db->prepare($query);
-        $result = $stmt->execute();
-
-        $response->getBody()->write(json_encode(array('message'=> 'Usuário deletado!')));
-        return $response->withHeader('Content-Type', 'application.json')->withStatus(200);
-
-    } catch(PDOException $exp) {
-
-        $response->getBody()->write(json_encode(array('Error' => $exp->getMessage())));
-        return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
-    }
-
-});
+})
+->add(auth());;
 
 
 $app->put('/usuario/put/{id}', function (Request $request, Response $response, $args) {
@@ -142,4 +122,31 @@ $app->put('/usuario/put/{id}', function (Request $request, Response $response, $
         return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
     }
 
-});
+})
+->add(auth());
+
+
+$app->delete('/usuario/delete/{id}', function (Request $request, Response $response, $args) {
+    
+    $id = $args['id'];
+    $query = "DELETE FROM usuario WHERE id = $id";
+
+    try {
+
+        $db = new Database();
+        $db = $db->connect();
+
+        $stmt = $db->prepare($query);
+        $result = $stmt->execute();
+
+        $response->getBody()->write(json_encode(array('message'=> 'Usuário deletado!')));
+        return $response->withHeader('Content-Type', 'application.json')->withStatus(200);
+
+    } catch(PDOException $exp) {
+
+        $response->getBody()->write(json_encode(array('Error' => $exp->getMessage())));
+        return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
+    }
+
+})
+->add(auth());
