@@ -139,7 +139,7 @@
 
 - No arquivo "index.php" você vai acrescentar o require de database, usuario e carro como está no código abaixo:
 
-      require __DIR__ . '/../config/Database.php';
+      require __DIR__ . '/../config/database.php';
       
       $app = AppFactory::create();
       
@@ -242,32 +242,6 @@
         }
     });
 
-### 17º passo -> Introdução ao método delete no arquivo "usuario.php"
-
-    $app->delete('/usuario/delete/{id}', function (Request $request, Response $response, $args) {
-        
-        $id = $args['id'];
-        $query = "DELETE FROM usuario WHERE id = $id";
-    
-        try {
-    
-            $db = new Database();
-            $db = $db->connect();
-    
-            $stmt = $db->prepare($query);
-            $result = $stmt->execute();
-    
-            $response->getBody()->write(json_encode(array('message'=> 'Usuário deletado!')));
-            return $response->withHeader('Content-Type', 'application.json')->withStatus(200);
-    
-        } catch(PDOException $exp) {
-    
-            $response->getBody()->write(json_encode(array('Error' => $exp->getMessage())));
-            return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
-        }
-    
-    });
-
 ### 18º passo -> Introdução ao método put no arquivo "usuario.php"
 
     $app->put('/usuario/put/{id}', function (Request $request, Response $response, $args) {
@@ -290,6 +264,32 @@
             $result = $stmt->execute();
     
             $response->getBody()->write(json_encode(array('message'=> 'Usuário atualizado!')));
+            return $response->withHeader('Content-Type', 'application.json')->withStatus(200);
+    
+        } catch(PDOException $exp) {
+    
+            $response->getBody()->write(json_encode(array('Error' => $exp->getMessage())));
+            return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
+        }
+    
+    });
+
+### 17º passo -> Introdução ao método delete no arquivo "usuario.php"
+
+    $app->delete('/usuario/delete/{id}', function (Request $request, Response $response, $args) {
+        
+        $id = $args['id'];
+        $query = "DELETE FROM usuario WHERE id = $id";
+    
+        try {
+    
+            $db = new Database();
+            $db = $db->connect();
+    
+            $stmt = $db->prepare($query);
+            $result = $stmt->execute();
+    
+            $response->getBody()->write(json_encode(array('message'=> 'Usuário deletado!')));
             return $response->withHeader('Content-Type', 'application.json')->withStatus(200);
     
         } catch(PDOException $exp) {
@@ -402,32 +402,6 @@
         }
     });
 
-### 22º passo -> Introdução ao método delete no arquivo "carro.php"
-
-    $app->delete('/carro/delete/{id}', function (Request $request, Response $response, $args) {
-        
-        $id = $args['id'];
-        $query = "DELETE FROM carro WHERE id = $id";
-    
-        try {
-    
-            $db = new Database();
-            $db = $db->connect();
-    
-            $stmt = $db->prepare($query);
-            $result = $stmt->execute();
-    
-            $response->getBody()->write(json_encode(array('message'=> 'Usuário deletado!')));
-            return $response->withHeader('Content-Type', 'application.json')->withStatus(200);
-    
-        } catch(PDOException $exp) {
-    
-            $response->getBody()->write(json_encode(array('Error' => $exp->getMessage())));
-            return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
-        }
-    
-    });
-
 ### 23º passo -> Introdução ao método put no arquivo "carro.php"
 
     $app->put('/carro/put/{id}', function (Request $request, Response $response, $args) {
@@ -460,6 +434,31 @@
     
     });
 
+### 22º passo -> Introdução ao método delete no arquivo "carro.php"
+
+    $app->delete('/carro/delete/{id}', function (Request $request, Response $response, $args) {
+        
+        $id = $args['id'];
+        $query = "DELETE FROM carro WHERE id = $id";
+    
+        try {
+    
+            $db = new Database();
+            $db = $db->connect();
+    
+            $stmt = $db->prepare($query);
+            $result = $stmt->execute();
+    
+            $response->getBody()->write(json_encode(array('message'=> 'Usuário deletado!')));
+            return $response->withHeader('Content-Type', 'application.json')->withStatus(200);
+    
+        } catch(PDOException $exp) {
+    
+            $response->getBody()->write(json_encode(array('Error' => $exp->getMessage())));
+            return $response->withHeader('Content-Type', 'application.json')->withStatus(500);
+        }
+    
+    });
     
 ### 24º passo -> Execute o comando a seguir para inicializar a api: 
 
@@ -471,7 +470,7 @@
 
       $ composer require tuupola/slim-basic-auth
 
-- Dentro da pasta "config", crie um arquivo chamado "database.php" e cole o seguinte código:
+- Dentro da pasta "config", crie um arquivo chamado "auth.php" e cole o seguinte código:
 
       <?php
       
@@ -491,7 +490,7 @@
 
 - No arquivo "index.php" acrescente este comando que irá importar o arquivo da autenticação:
 
-      require _DIR_ . '/auth.php';
+      require __DIR__ . '/../config/auth.php';
 
 - Adicione este comando no código de "carro.php" e "usuario.php":
 
