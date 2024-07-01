@@ -464,3 +464,45 @@
 ### 24º passo -> Execute o comando a seguir para inicializar a api: 
 
     $ php -S localhost:8000 -t public
+
+### 25º passo -> Autenticação do usuário:
+
+- Na pasta raiz, abra o terminal e executar o seguinte comando, se trata de uma biblioteca que irá adicionar componentes para a autenticação funcionar:
+
+      $ composer require tuupola/slim-basic-auth
+
+- Dentro da pasta "config", crie um arquivo chamado "database.php" e cole o seguinte código:
+
+      <?php
+      
+      namespace public;
+      
+      use Tuupola\Middleware\HttpBasicAuthentication;
+      
+      function auth(): HttpBasicAuthentication{
+      
+          return new HttpBasicAuthentication([
+              "users" => [
+                  "root" => "123456"
+              ]
+              ]);
+      }
+      ?>
+
+- No arquivo "index.php" acrescente este comando que irá importar o arquivo da autenticação:
+
+      require _DIR_ . '/auth.php';
+
+- Adicione este comando no código de "carro.php" e "usuario.php":
+
+      $app->group('', function() use ($app){
+          
+      })->add(auth());
+
+- Por fim, você vai recortar todo o código dos métodos e colocar dentro das chaves dessa função de agrupamento;
+- Para teste, no Insomnia na aba "Basic" vamos selecionar a autenticação "Basic Auth" e colocar o login e senha que foi definido  anteriormente.
+
+
+### 26º passo -> Testar seus conhecimentos!!! Que os jogos comecem🎉🧨
+
+- Acesse o link, adicione nosso pin e escolha um apelido: https://kahoot.com/
