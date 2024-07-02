@@ -242,7 +242,7 @@
         }
     });
 
-### 18º passo -> Introdução ao método put no arquivo "usuario.php"
+### 17º passo -> Introdução ao método put no arquivo "usuario.php"
 
     $app->put('/usuario/put/{id}', function (Request $request, Response $response, $args) {
         
@@ -274,7 +274,7 @@
     
     });
 
-### 17º passo -> Introdução ao método delete no arquivo "usuario.php"
+### 18º passo -> Introdução ao método delete no arquivo "usuario.php"
 
     $app->delete('/usuario/delete/{id}', function (Request $request, Response $response, $args) {
         
@@ -402,7 +402,7 @@
         }
     });
 
-### 23º passo -> Introdução ao método put no arquivo "carro.php"
+### 22º passo -> Introdução ao método put no arquivo "carro.php"
 
     $app->put('/carro/put/{id}', function (Request $request, Response $response, $args) {
         
@@ -434,7 +434,7 @@
     
     });
 
-### 22º passo -> Introdução ao método delete no arquivo "carro.php"
+### 23º passo -> Introdução ao método delete no arquivo "carro.php"
 
     $app->delete('/carro/delete/{id}', function (Request $request, Response $response, $args) {
         
@@ -468,7 +468,7 @@
 
 - Na pasta raiz, abra o terminal e executar o seguinte comando, se trata de uma biblioteca que irá adicionar componentes para a autenticação funcionar:
 
-      $ composer require tuupola/slim-basic-auth
+      $ composer require tuupola/slim-basic-auth --with-all-dependencies
 
 - Dentro da pasta "config", crie um arquivo chamado "auth.php" e cole o seguinte código:
 
